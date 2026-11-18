@@ -17,3 +17,6 @@ GPS Map Matching and Route Reconstruction.
 ## Dataset
 Keep raw evaluator data isolated.
 Never expose ground-truth routes to inference.
+
+## Quick start (backend)
+See [backend/README.md](backend/README.md). `python -m uvicorn backend.app.main:app --port 8000`

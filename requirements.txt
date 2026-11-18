@@ -3,13 +3,15 @@ pandas
 scipy
 scikit-learn
 geopandas
-shapely
+shapely>=2.0
 pyproj
 matplotlib
 folium
 optuna
 fastapi
 uvicorn[standard]
-pydantic
+pydantic>=2
 joblib
+python-dotenv
 pytest
+httpx
