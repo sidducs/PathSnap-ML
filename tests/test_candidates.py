@@ -75,3 +75,4 @@ def test_no_duplicate_candidates_per_observation(synthetic_trip_for_candidates):
     # Each observation should have unique arc_ids
     for obs_idx, group in candidates_df.groupby("observation_index"):
         assert len(group["arc_id"]) == len(group["arc_id"].unique())
+

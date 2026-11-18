@@ -65,3 +65,4 @@ def test_reference_route_alignment():
     matched_1 = obs1_labels[obs1_labels["arc_id"] == 1]
     assert len(matched_1) == 1
     assert matched_1.iloc[0]["label"] == 1
+

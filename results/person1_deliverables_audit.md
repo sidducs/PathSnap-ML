@@ -24,10 +24,10 @@
 | `CAND-GENERATION` | **CANDIDATES** | GPS-to-Road Candidate Generation & cKDTree Spatial Index | `ml/candidates/candidate_generation.py` | True | 10,006 B | PASS (2/2 tests) | **[PASS]** |
 | `ALIGN-ROUTE` | **ALIGNMENT** | Reference Route Alignment & Ground-Truth Labeling | `ml/candidates/route_alignment.py` | True | 10,366 B | PASS (1/1 test) | **[PASS]** |
 | `FEAT-ENGINEERING` | **FEATURES** | Candidate-Level Feature Engineering (27 features) | `ml/features/feature_engineering.py` | True | 15,646 B | PASS (2/2 tests) | **[PASS]** |
-| `SCRIPT-INSPECT` | **SCRIPTS** | Dataset Inventory Inspector Script | `scripts/inspect_dataset.py` | True | 4,103 B | PASS | **[PASS]** |
+| `SCRIPT-INSPECT` | **SCRIPTS** | Dataset Inventory Inspector Script | `scripts/inspect_dataset.py` | True | 4,104 B | PASS | **[PASS]** |
 | `SCRIPT-REPORT` | **SCRIPTS** | Automated EDA & Quality Report Generator | `scripts/generate_dataset_report.py` | True | 15,487 B | PASS | **[PASS]** |
 | `SCRIPT-BUILD` | **SCRIPTS** | ML Handover Dataset Builder Script | `scripts/build_handover_dataset.py` | True | 6,584 B | PASS | **[PASS]** |
-| `SCRIPT-MAPS` | **SCRIPTS** | Interactive Folium Map Generator | `scripts/generate_maps.py` | True | 10,056 B | PASS | **[PASS]** |
+| `SCRIPT-MAPS` | **SCRIPTS** | Interactive Folium Map Generator | `scripts/generate_maps.py` | True | 10,057 B | PASS | **[PASS]** |
 | `OUT-INVENTORY` | **OUTPUTS** | Dataset Inventory CSV | `results/dataset_inventory.csv` | True | 8,831 B | PASS | **[PASS]** |
 | `OUT-QUALITY-JSON` | **OUTPUTS** | Dataset Quality Report JSON | `results/dataset_quality_report.json` | True | 201,110 B | PASS | **[PASS]** |
 | `OUT-TIMESTAMP-CSV` | **OUTPUTS** | Timestamp & Sampling Analysis CSV | `results/timestamp_analysis.csv` | True | 16,192 B | PASS | **[PASS]** |

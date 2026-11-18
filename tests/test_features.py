@@ -68,3 +68,4 @@ def test_schema_documentation():
     assert "targets" in schema
     for col in FEATURE_COLUMNS:
         assert col in schema["features"], f"Feature {col} not documented in schema"
+

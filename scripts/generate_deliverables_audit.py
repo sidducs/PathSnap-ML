@@ -11,7 +11,7 @@ import json
 import os
 import sys
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Tuple
 
 import pandas as pd
 
@@ -341,3 +341,4 @@ def generate_audit():
 
 if __name__ == "__main__":
     generate_audit()
+

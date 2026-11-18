@@ -88,7 +88,7 @@
       "deliverable": "Dataset Inventory Inspector Script",
       "expected_file": "scripts/inspect_dataset.py",
       "exists": true,
-      "size_bytes": 4103,
+      "size_bytes": 4104,
       "has_implementation": true,
       "test_result": "PASS",
       "status": "PASS"
@@ -121,7 +121,7 @@
       "deliverable": "Interactive Folium Map Generator",
       "expected_file": "scripts/generate_maps.py",
       "exists": true,
-      "size_bytes": 10056,
+      "size_bytes": 10057,
       "has_implementation": true,
       "test_result": "PASS",
       "status": "PASS"
