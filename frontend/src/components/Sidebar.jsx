@@ -2,12 +2,12 @@ import React from 'react';
 import { Play, Layers, Activity, CheckCircle2 } from 'lucide-react';
 
 const MODELS = [
-  { id: 'hmm_xgboost', name: 'HMM + XGBoost (Viterbi Decoded)', tag: 'Sequential Best' },
-  { id: 'xgboost', name: 'XGBoost (Gradient Boosting)', tag: 'Boosting' },
-  { id: 'random_forest', name: 'Random Forest (Ensemble Bagging)', tag: 'Ensemble' },
-  { id: 'rbf_svm', name: 'RBF Support Vector Machine', tag: 'Kernel SVM' },
-  { id: 'mlp', name: 'MLP (Multilayer Perceptron)', tag: 'Neural Net' },
-  { id: 'logistic_regression', name: 'Logistic Regression (Linear)', tag: 'Linear' }
+  { id: 'logistic_regression', name: '1. Logistic Regression (Linear Model)' },
+  { id: 'random_forest', name: '2. Random Forest (Bagging Ensemble)' },
+  { id: 'xgboost', name: '3. XGBoost (Gradient Boosting)' },
+  { id: 'rbf_svm', name: '4. RBF Support Vector Machine (Kernel SVM)' },
+  { id: 'mlp', name: '5. MLP (Multilayer Perceptron - Neural Net)' },
+  { id: 'hmm_xgboost', name: '★ Final: HMM + XGBoost (Viterbi Decoder)' }
 ];
 
 export default function Sidebar({
@@ -46,7 +46,7 @@ export default function Sidebar({
           </select>
         </div>
 
-        {/* 2. Model Selector (Team's 5 Models + Sequential Decoder) */}
+        {/* 2. Model Selector (Matches Team Table 1-to-5) */}
         <div>
           <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">
             2. ML Classifier / Decoder
@@ -58,7 +58,7 @@ export default function Sidebar({
           >
             {MODELS.map((m) => (
               <option key={m.id} value={m.id}>
-                {m.name} [{m.tag}]
+                {m.name}
               </option>
             ))}
           </select>
