@@ -10,20 +10,26 @@ export default function ConnectionModal({ isOpen, onClose, backendUrl, onSaveUrl
 
   const handleTestPing = async () => {
     setTestStatus('testing');
-    setStatusMsg('Pinging inference server at ' + url + '...');
+    setStatusMsg('Pinging GET ' + url + '/health ...');
 
     try {
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 2500);
+      const timeoutId = setTimeout(() => controller.abort(), 3000);
 
-      const res = await fetch(`${url}/docs`, { method: 'GET', signal: controller.signal, mode: 'no-cors' });
+      const res = await fetch(`${url}/health`, { method: 'GET', signal: controller.signal });
       clearTimeout(timeoutId);
 
-      setTestStatus('success');
-      setStatusMsg('Connection reached! Laptop 1 is listening on this endpoint.');
+      if (res.ok) {
+        const data = await res.json();
+        setTestStatus('success');
+        setStatusMsg(`Success! ${data.service || 'PathSnap API'} (${data.model_name || 'Tuned XGBoost'}) is live on Laptop 1!`);
+      } else {
+        setTestStatus('failed');
+        setStatusMsg(`Connected, but server returned HTTP ${res.status}.`);
+      }
     } catch (err) {
       setTestStatus('failed');
-      setStatusMsg('Could not reach ' + url + '. Verify Laptop 1 is on the same Wi-Fi/LAN and FastAPI is running.');
+      setStatusMsg('Could not reach ' + url + '. Verify both laptops are on the same Wi-Fi and FastAPI is running.');
     }
   };
 
@@ -42,8 +48,8 @@ export default function ConnectionModal({ isOpen, onClose, backendUrl, onSaveUrl
               <Server className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="text-sm font-bold text-slate-900">Laptop 1 API Configuration</h3>
-              <p className="text-xs text-slate-500">Two-Laptop Distributed Network Settings</p>
+              <h3 className="text-sm font-bold text-slate-900">Laptop 1 Backend Configuration</h3>
+              <p className="text-xs text-slate-500">Distributed Network Settings (Shared Wi-Fi)</p>
             </div>
           </div>
           <button onClick={onClose} className="text-slate-400 hover:text-slate-600 p-1 rounded-lg">
@@ -53,14 +59,14 @@ export default function ConnectionModal({ isOpen, onClose, backendUrl, onSaveUrl
 
         <div className="space-y-3">
           <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600">
-            Backend Endpoint (FastAPI IP & Port)
+            Backend API Base URL
           </label>
           <div className="flex space-x-2">
             <input 
               type="text" 
               value={url}
               onChange={(e) => setUrl(e.target.value)}
-              placeholder="http://192.168.1.100:8000"
+              placeholder="http://10.30.202.24:8000"
               className="flex-1 bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs font-mono text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <button 
@@ -92,10 +98,10 @@ export default function ConnectionModal({ isOpen, onClose, backendUrl, onSaveUrl
           )}
 
           <div className="p-3 bg-slate-50 rounded-lg border border-slate-200 text-[11px] text-slate-600 space-y-1">
-            <strong className="text-slate-800 block">Two-Laptop Setup Tip:</strong>
-            <p>1. Connect both Laptop 1 and Laptop 2 to the same Wi-Fi or phone hotspot.</p>
-            <p>2. On Laptop 1, run: <code className="bg-slate-200 px-1 py-0.5 rounded text-slate-800">uvicorn app:app --host 0.0.0.0 --port 8000</code>.</p>
-            <p>3. Enter Laptop 1's local IP address here.</p>
+            <strong className="text-slate-800 block">Siddhu's Laptop 1 Endpoint:</strong>
+            <p>Configured: <code className="bg-slate-200 px-1 py-0.5 rounded text-slate-900 font-mono">http://10.30.202.24:8000</code></p>
+            <p>Health probe checks: <code className="bg-slate-200 px-1 py-0.5 rounded text-slate-900 font-mono">/health</code></p>
+            <p>Inference sends: <code className="bg-slate-200 px-1 py-0.5 rounded text-slate-900 font-mono">POST /predict</code> with <code className="bg-slate-200 px-1 py-0.5 rounded text-slate-900 font-mono">{`{"trip_id": "..."}`}</code></p>
           </div>
         </div>
 

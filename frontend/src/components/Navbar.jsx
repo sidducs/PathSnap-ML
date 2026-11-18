@@ -1,7 +1,7 @@
 import React from 'react';
-import { Network, Server, Settings2 } from 'lucide-react';
+import { Server, Settings2 } from 'lucide-react';
 
-export default function Navbar({ backendUrl, onOpenSettings, isConnected }) {
+export default function Navbar({ backendUrl, onOpenSettings, isConnected, healthInfo }) {
   return (
     <header className="h-16 bg-white border-b border-slate-200 px-6 flex items-center justify-between shrink-0 shadow-sm z-20">
       <div className="flex items-center space-x-3.5">
@@ -15,29 +15,40 @@ export default function Navbar({ backendUrl, onOpenSettings, isConnected }) {
               Distributed Map Matching
             </span>
             <span className="text-[11px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200 font-mono">
-              UE24CS352A
+              Laptop 2
             </span>
           </div>
-          <p className="text-xs text-slate-500">Trajectory Reconstruction & Topology Recovery</p>
+          <p className="text-xs text-slate-500">Evaluator UI & Trajectory Reconstruction</p>
         </div>
       </div>
 
-      <div className="flex items-center space-x-4">
-        {/* Laptop 2 Client Badge */}
-        <div className="flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span className="text-slate-600 font-medium">Node: <strong class="text-slate-900">Laptop 2 (Evaluator UI)</strong></span>
-        </div>
+      <div className="flex items-center space-x-3">
+        {/* Dynamic Connection Status Pill */}
+        {isConnected ? (
+          <div className="flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-emerald-50 border border-emerald-200 text-xs text-emerald-800 font-medium shadow-sm">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span>
+              Connected to Laptop 1{' '}
+              <strong className="font-semibold text-emerald-950">
+                ({healthInfo?.model_name || 'Tuned XGBoost'} + {healthInfo?.sequence_decoder || 'HMM'})
+              </strong>
+            </span>
+          </div>
+        ) : (
+          <div className="flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-amber-50 border border-amber-200 text-xs text-amber-800 font-medium">
+            <span className="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+            <span>Connecting to Laptop 1 ({backendUrl})...</span>
+          </div>
+        )}
 
-        {/* Laptop 1 Connection Status */}
+        {/* Backend Target IP Settings */}
         <button 
           onClick={onOpenSettings}
-          className="flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200 hover:bg-slate-100 transition text-xs text-slate-700"
-          title="Configure Laptop 1 API Address"
+          className="flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200 hover:bg-slate-100 active:bg-slate-200 transition text-xs text-slate-700"
+          title="Configure Laptop 1 API IP Address"
         >
           <Server className="w-3.5 h-3.5 text-slate-500" />
-          <span className="font-mono text-slate-600 truncate max-w-[150px]">{backendUrl}</span>
-          <span className={`w-2 h-2 rounded-full ${isConnected ? 'bg-emerald-500' : 'bg-amber-400'}`}></span>
+          <span className="font-mono text-slate-700 font-semibold">{backendUrl}</span>
           <Settings2 className="w-3.5 h-3.5 text-slate-400 ml-1" />
         </button>
       </div>
