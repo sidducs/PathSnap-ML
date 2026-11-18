@@ -19,3 +19,6 @@ ml/artifacts/*
 data/*
 !data/README.md
 
+
+# Evaluator ground-truth data - NEVER COMMIT
+EVALUATOR_TESTS/
