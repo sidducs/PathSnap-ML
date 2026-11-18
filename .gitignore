@@ -16,7 +16,6 @@ data/*
 *.nodes
 *.arcs
 *.route
-EVALUATOR_TESTS/
 
 # Trained artifacts are deliverables
 ml/artifacts/*
