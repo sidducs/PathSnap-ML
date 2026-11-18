@@ -1,0 +1,36 @@
+{
+  "model_name": "Tuned_XGBoost_Classifier",
+  "algorithm_family": "Gradient Boosting",
+  "model_version": "1.0.0",
+  "best_hyperparameters": {
+    "n_estimators": 140,
+    "max_depth": 6,
+    "learning_rate": 0.0631649296665089,
+    "subsample": 0.7449063036457663,
+    "colsample_bytree": 0.869169347852197,
+    "reg_alpha": 0.10214537910710605,
+    "reg_lambda": 7.230078410123769
+  },
+  "feature_names": [
+    "perp_dist_m",
+    "heading_diff_rad",
+    "proj_ratio",
+    "arc_len_m",
+    "gps_speed_mps",
+    "time_delta_s",
+    "speed_implied_mps"
+  ],
+  "feature_count": 7,
+  "target_name": "label",
+  "optimization_engine": "Optuna (TPE Sampler)",
+  "optimization_trials": 12,
+  "metrics": {
+    "cv_macro_f1": 0.8022,
+    "student_test_macro_f1": 0.8529,
+    "observation_top1_accuracy": "72.46%",
+    "log_loss": 0.1009,
+    "inference_latency_ms_per_1k": 0.34,
+    "refit_time_seconds": 1.67
+  },
+  "created_at": "2026-11-18 15:20:35"
+}

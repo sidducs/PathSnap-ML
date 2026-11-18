@@ -1,0 +1,6 @@
+metric,untuned,tuned
+CV Macro F1,0.7858,0.8022
+Student-Test Macro F1,0.852,0.8529
+Top-1 Accuracy,72.36%,72.46%
+Log Loss,0.1012,0.1009
+Inference Latency ms/1k,0.36,0.34
