@@ -1,0 +1,26 @@
+model,fold,macro_f1,accuracy
+Logistic Regression,1,0.6146,0.9213
+Logistic Regression,2,0.7137,0.9440
+Logistic Regression,3,0.7012,0.9309
+Logistic Regression,4,0.7529,0.8653
+Logistic Regression,5,0.7280,0.9284
+Random Forest,1,0.6953,0.9290
+Random Forest,2,0.7849,0.9534
+Random Forest,3,0.7807,0.9400
+Random Forest,4,0.8151,0.8985
+Random Forest,5,0.8027,0.9415
+XGBoost,1,0.7068,0.9261
+XGBoost,2,0.7980,0.9541
+XGBoost,3,0.7890,0.9401
+XGBoost,4,0.8229,0.9005
+XGBoost,5,0.8125,0.9416
+RBF Support Vector Machine,1,0.6400,0.9281
+RBF Support Vector Machine,2,0.7582,0.9501
+RBF Support Vector Machine,3,0.7549,0.9385
+RBF Support Vector Machine,4,0.7576,0.8799
+RBF Support Vector Machine,5,0.7836,0.9379
+MLP (Neural Network),1,0.7182,0.9280
+MLP (Neural Network),2,0.7803,0.9510
+MLP (Neural Network),3,0.7861,0.9389
+MLP (Neural Network),4,0.8178,0.8950
+MLP (Neural Network),5,0.8089,0.9400
