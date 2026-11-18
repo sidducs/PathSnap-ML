@@ -1,3 +1,4 @@
+
 __pycache__/
 *.pyc
 .venv/
@@ -7,21 +8,22 @@ node_modules/
 dist/
 .ipynb_checkpoints/
 .pytest_cache/
-data/raw/
-data/processed/
+
+# Raw hackathon data - NEVER commit evaluator data
+data/*
+!data/README.md
+*.track
+*.nodes
+*.arcs
+*.route
+EVALUATOR_TESTS/
+
+# Trained artifacts are deliverables
 ml/artifacts/*
 !ml/artifacts/.gitkeep
 *.joblib
 *.pkl
 *.keras
-
-# --- raw hackathon data: NEVER commit (evaluator data must stay private) ---
-data/
-*.track
-*.nodes
-*.arcs
-*.route
-
-# --- trained artifacts ARE deliverables (README: 'include saved model weights and config'); un-ignore them ---
 !ml/artifacts/model.joblib
 !ml/artifacts/hmm_config.json
+
