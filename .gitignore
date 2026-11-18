@@ -14,3 +14,11 @@ ml/artifacts/*
 *.joblib
 *.pkl
 *.keras
+
+# Hackathon datasets - never push raw data
+data/*
+!data/README.md
+
+
+# Evaluator ground-truth data - NEVER COMMIT
+EVALUATOR_TESTS/
