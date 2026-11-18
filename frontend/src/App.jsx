@@ -79,17 +79,22 @@ export default function App() {
   const handleRunInference = async () => {
     setIsLoading(true);
 
+    const useHmm = selectedModel.startsWith('hmm');
+    let matcherName = selectedModel.replace('hmm_', '');
+    if (matcherName === 'logistic_regression') matcherName = 'logistic';
+
     try {
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 3000);
+      const timeoutId = setTimeout(() => controller.abort(), 4000);
 
-      // Attempt live request to Laptop 1
-      const response = await fetch(`${backendUrl}/api/v1/map-match`, {
+      // Attempt live request to Laptop 1 (/predict endpoint)
+      const response = await fetch(`${backendUrl}/predict`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           trip_id: selectedTripId,
-          model: selectedModel
+          use_hmm: useHmm,
+          matcher: matcherName
         }),
         signal: controller.signal
       });
@@ -99,13 +104,27 @@ export default function App() {
         const data = await response.json();
         setApiStatus('live');
         setIsConnected(true);
-        if (data.raw_gps) setRawGps(data.raw_gps);
-        if (data.matched_route) setMatchedRoute(data.matched_route);
-        if (data.metrics) {
+
+        // Flatten route_geometry: [[ [lat, lon], [lat, lon] ], ...]
+        if (data.route_geometry && data.route_geometry.length > 0) {
+          const flatRoute = [];
+          data.route_geometry.forEach(arc => {
+            if (arc && arc.length >= 2) {
+              if (flatRoute.length === 0) flatRoute.push(arc[0]);
+              flatRoute.push(arc[1]);
+            }
+          });
+          if (flatRoute.length > 0) setMatchedRoute(flatRoute);
+        }
+
+        if (data.summary) {
+          const totalTiming = data.timing_ms 
+            ? Object.values(data.timing_ms).reduce((a, b) => a + b, 0) 
+            : 28;
           setMetrics({
-            pointwise_accuracy: data.metrics.pointwise_accuracy ?? 96.5,
-            route_continuity: data.metrics.route_continuity ?? 98.8,
-            latency_ms: data.metrics.inference_time_ms ?? 28
+            pointwise_accuracy: Math.round((data.summary.top1_accuracy ?? 0.95) * 1000) / 10,
+            route_continuity: Math.round((data.summary.route_continuity ?? 0.98) * 1000) / 10,
+            latency_ms: Math.round(totalTiming)
           });
         }
         setIsLoading(false);
