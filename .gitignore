@@ -14,3 +14,8 @@ ml/artifacts/*
 *.joblib
 *.pkl
 *.keras
+
+# Hackathon datasets - never push raw data
+data/*
+!data/README.md
+
