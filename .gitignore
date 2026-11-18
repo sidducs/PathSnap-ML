@@ -14,3 +14,14 @@ ml/artifacts/*
 *.joblib
 *.pkl
 *.keras
+
+# --- raw hackathon data: NEVER commit (evaluator data must stay private) ---
+data/
+*.track
+*.nodes
+*.arcs
+*.route
+
+# --- trained artifacts ARE deliverables (README: 'include saved model weights and config'); un-ignore them ---
+!ml/artifacts/model.joblib
+!ml/artifacts/hmm_config.json
